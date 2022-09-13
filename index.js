@@ -1,30 +1,67 @@
-import { print } from './js/lib.js';
-/* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
-   Complete the below for code reviewers' convenience:
+import {
+   print
+} from './js/lib.js';
 
-   Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
-   */
+const dog = {
+   species: 'dog',
+   name: 'JT',
+   gender: 'male',
+   legs: 4,
+   hands: 0,
+   saying: 'woof-woof!',
+   friends: ['Inna', 'Tolik']
+}
 
-// ======== OBJECTS DEFINITIONS ========
-// Define your objects here
+const cat = {
+   species: 'cat',
+   name: 'Sherry',
+   gender: 'female',
+   legs: 4,
+   hands: 0,
+   saying: 'meow-meow!',
+   friends: ['Selina']
+}
 
+const woman = {
+   species: 'woman',
+   name: 'Inna',
+   gender: 'female',
+   legs: 2,
+   hands: 2,
+   saying: `Hi, girls!`,
+   friends: ['Tolik', 'Sherry', 'JT', 'Selina']
+}
 
-// ======== OUTPUT ========
-/* Use print(message) for output.
-   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
+const man = {
+   species: 'man',
+   name: 'Tolik',
+   gender: 'male',
+   legs: 2,
+   hands: 2,
+   saying: 'Hello, guys!',
+   friends: ['JT']
+}
 
-   Message can contain HTML markup. You may also tweak index.html and/or styles.css.
-   However, please, REFRAIN from improving visuals at least until your code is reviewed
-   so code reviewers might focus on a single file that is index.js.
-   */
+const catWoman = (form = cat) => {
+   const catWoman = {...form}
 
-/* Print examples:
-   print('ABC');
-   print('<strong>ABC</strong>');
-   print('<strong>ABC</strong>', 'div');
+   catWoman.species = 'cat-woman'
+   catWoman.name = 'Selina'
+   catWoman.gender = 'female'
+   catWoman.friends = form.friends.filter(me => me !== "Selina")
+   return catWoman
+}
 
-   print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-   */
+const population = [dog, cat, man, woman, catWoman(woman)]
+
+for (let item of population) {
+   console.log(Object.values(item));
+}
+
+print(population.map(obj => {
+   const {species, name, gender, legs, hands, saying, friends} = obj
+   const number = population.indexOf(obj) + 1
+   const s = "<strong>", ss = "</strong>"
+
+   return saying.charAt(0) === saying.charAt(0).toLocaleLowerCase() ? `${number}. ${s+saying+ss} It's a ${s+gender+' '+species+ss} with ${s+legs+ss} paws. And ${gender==="female" ? "she": "he"} is friends with ${s+friends+ss}.` : `${number}. ${s+saying+ss} My name is ${s+name+ss}. I'm a ${s+species+ss}. I have ${s+legs+ss} legs and ${s+hands+ss} hands. ${species=='cat-woman' ? `But sometimes I have a ${s+catWoman(cat).legs+ss} claws. My`: "My"} ${friends.length>1 ? "friends are" : "friend is"} ${s+friends+ss}.`
+}).join('\n'))
