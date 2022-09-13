@@ -139,3 +139,4 @@
  2022-09-11 |    5    |     57     | [sofiichuk](https://github.com/sofiichuk/a-tiny-JS-world)
  2022-09-12 |    5    |     66     | [DmytryjK](https://github.com/DmytryjK/a-tiny-JS-world)
  2022-09-12 |    5    |     37     | [rahmanoff](https://github.com/rahmanoff/a-tiny-JS-world)
+ 2022-09-13 |    5    |     52     | [Okylistik]( https://github.com/Okylistik/a-tiny-JS-world)
