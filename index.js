@@ -54,10 +54,6 @@ const catWoman = (form = cat) => {
 
 const population = [dog, cat, man, woman, catWoman(woman)]
 
-for (let item of population) {
-   console.log(Object.values(item));
-}
-
 print(population.map(obj => {
    const {species, name, gender, legs, hands, saying, friends} = obj
    const number = population.indexOf(obj) + 1
