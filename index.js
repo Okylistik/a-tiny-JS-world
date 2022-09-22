@@ -1,63 +1,90 @@
-import {
-   print
-} from './js/lib.js';
+import { print } from "./js/lib.js";
 
-const dog = {
-   species: 'dog',
-   name: 'JT',
-   gender: 'male',
-   legs: 4,
-   hands: 0,
-   saying: 'woof-woof!',
-   friends: ['Inna', 'Tolik']
+class Creature {
+  constructor(name, gender, friends) {
+    this.name = name;
+    this.gender = gender;
+    this.friends = friends;
+  }
+}
+console.log();
+class Humans extends Creature {
+  constructor(species, name, gender, saying, friends) {
+    super(species, name, gender, saying, friends);
+    this.legs = 2;
+    this.hands = 2;
+  }
+  greeting() {
+    return `${this.saying} . I'm a ${this.species}. I have ${
+      this.legs
+    } legs and ${this.hands} hands. My ${
+      this.friends.length > 1 ? "friends are" : "friend is"
+    } ${this.friends}.`;
+  }
+}
+class Man extends Humans {
+  constructor(name, friends, hands, legs) {
+    super(name, friends, hands, legs);
+    this.species = "man";
+    this.gender = "male";
+    this.saying = `Hi, guys! My name is ${this.name}`;
+    this.friends = ["Inna", "JT", "Sherry"];
+  }
+}
+class Woman extends Humans {
+  constructor(name, friends) {
+    super(name, friends);
+    this.species = "woman";
+    this.gender = "female";
+    this.saying = `Hi, girls! My name is ${this.name}`;
+    this.friends = ["Tolik", "JT"];
+  }
+}
+class Animals extends Creature {
+  constructor(species, name, gender, saying, friends) {
+    super(species, name, gender, saying, friends);
+    this.paws = 4;
+  }
+  greeting() {
+    return `${this.saying} It's a ${this.gender} ${this.species} - ${this.name} with ${this.paws} paws. ${this.name} is friends with ${this.friends}.`;
+  }
 }
 
-const cat = {
-   species: 'cat',
-   name: 'Sherry',
-   gender: 'female',
-   legs: 4,
-   hands: 0,
-   saying: 'meow-meow!',
-   friends: ['Selina']
+class Dog extends Animals {
+  constructor(name, gender, friends) {
+    super(name, gender, friends);
+    this.species = "dog";
+    this.saying = "woof-woof!";
+  }
 }
 
-const woman = {
-   species: 'woman',
-   name: 'Inna',
-   gender: 'female',
-   legs: 2,
-   hands: 2,
-   saying: `Hi, girls!`,
-   friends: ['Tolik', 'Sherry', 'JT', 'Selina']
+class Cat extends Animals {
+  constructor(name, gender, friends) {
+    super(name, gender, friends);
+    this.species = "cat";
+    this.saying = "meow-meow!";
+  }
 }
 
-const man = {
-   species: 'man',
-   name: 'Tolik',
-   gender: 'male',
-   legs: 2,
-   hands: 2,
-   saying: 'Hello, guys!',
-   friends: ['JT']
+function change() {
+  let random = new Date().getSeconds() % 2;
+  return random === 0 ? Cat : Woman;
+}
+class CatWoman extends change() {
+  constructor(species, saying, paws, hands, legs) {
+    super(species, saying, paws, hands, legs);
+    this.gender = "female";
+    this.name = "Selina";
+    this.friends = [cat.name];
+  }
 }
 
-const catWoman = (form = cat) => {
-   const catWoman = {...form}
+const man = new Man("Tolik", ["JT"]);
+const dog = new Dog("JT", "male", ["Inna", "Tolik"]);
+const cat = new Cat("Sherry", "female", ["Selina"]);
+const woman = new Woman("Inna", ["Tolik", "Sherry", "JT", "Selina"]);
+const catWoman = new CatWoman();
 
-   catWoman.species = 'cat-woman'
-   catWoman.name = 'Selina'
-   catWoman.gender = 'female'
-   catWoman.friends = form.friends.filter(me => me !== "Selina")
-   return catWoman
-}
+const population = [dog, cat, man, woman, catWoman];
 
-const population = [dog, cat, man, woman, catWoman(woman)]
-
-print(population.map(obj => {
-   const {species, name, gender, legs, hands, saying, friends} = obj
-   const number = population.indexOf(obj) + 1
-   const s = "<strong>", ss = "</strong>"
-
-   return saying.charAt(0) === saying.charAt(0).toLocaleLowerCase() ? `${number}. ${s+saying+ss} It's a ${s+gender+' '+species+ss} with ${s+legs+ss} paws. And ${gender==="female" ? "she": "he"} is friends with ${s+friends+ss}.` : `${number}. ${s+saying+ss} My name is ${s+name+ss}. I'm a ${s+species+ss}. I have ${s+legs+ss} legs and ${s+hands+ss} hands. ${species=='cat-woman' ? `But sometimes I have a ${s+catWoman(cat).legs+ss} claws. My`: "My"} ${friends.length>1 ? "friends are" : "friend is"} ${s+friends+ss}.`
-}).join('\n'))
+population.forEach((i, index) => print(`${index + 1}.  ${i.greeting()}`));
