@@ -15,9 +15,9 @@ class Humans extends Creature {
     this.hands = 2;
   }
   greeting() {
-    return `${this.saying} . I'm a ${this.species}. I have ${
-      this.legs
-    } legs and ${this.hands} hands. My ${
+    return `${this.saying} My name is ${this.name}. I'm a ${
+      this.species
+    }. I have ${this.legs} legs and ${this.hands} hands. My ${
       this.friends.length > 1 ? "friends are" : "friend is"
     } ${this.friends}.`;
   }
@@ -27,7 +27,7 @@ class Man extends Humans {
     super(name, friends, hands, legs);
     this.species = "man";
     this.gender = "male";
-    this.saying = `Hi, guys! My name is ${this.name}`;
+    this.saying = `Hi, guys!`;
     this.friends = ["Inna", "JT", "Sherry"];
   }
 }
@@ -36,8 +36,9 @@ class Woman extends Humans {
     super(name, friends);
     this.species = "woman";
     this.gender = "female";
-    this.saying = `Hi, girls! My name is ${this.name}`;
+    this.saying = `Hi, girls!`;
     this.friends = ["Tolik", "JT"];
+    console.log(this.name);
   }
 }
 class Animals extends Creature {
@@ -76,6 +77,7 @@ class CatWoman extends change() {
     this.gender = "female";
     this.name = "Selina";
     this.friends = [cat.name];
+    console.log(this.name);
   }
 }
 
